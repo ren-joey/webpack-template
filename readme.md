@@ -1,12 +1,10 @@
 # Webpack 建立流程
 
 ## 參考連結
----
 
 [webpack官方網站](https://webpack.js.org/)
 
 ## 安裝基本元件
----
 
 安裝全域資源
 ```bash
@@ -40,7 +38,6 @@ _**ROOT**_<br/>
   ∟&emsp;_package.json_&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;npm 設定檔
 
 ## webpack 設置
----
 
 編輯 _**webpack.config.js**_
 ```javascript
@@ -68,7 +65,6 @@ webpack
 <img src="https://i.imgur.com/PzXzQSB.png" width="400">
 
 ## 加入 scss 至專案中
----
 
 安裝相依套件
 ```bash
@@ -112,7 +108,6 @@ module.exports = {
 ```
 
 ##專案圖包處理
----
 
 安裝相依套件
 ```bash
@@ -169,7 +164,6 @@ module.exports = {
 > 本範例使用 [hash] 將檔案重新命名為隨機名稱，如要維持檔案名稱需改為 [name]
 
 ## 生成 index.html 檔案
----
 
 編輯 _**index.html**_ 檔案
 ```html
@@ -258,7 +252,6 @@ module.exports = {
 ```
 
 ## 其他設置
----
 
 ### 發布路徑清空
 
