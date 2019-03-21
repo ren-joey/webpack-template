@@ -3,53 +3,72 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
+
 module.exports = {
-  mode: 'development',  // 'production' || 'development' || 'none'
+  mode: 'development',
   entry: {
-    index: './assets/js/index'
+    index: './assets/js/index.js'
   },
   output: {
-    path: path.resolve('dist/'),
+    path: path.resolve('dist'),
     filename: 'assets/js/[hash].bundle.js'
   },
   module: {
-    rules: [
+    rules: [{
+        test: /\.html$/,
+        use: [{
+          loader: 'html-loader',
+          options: {
+            minimize: true
+          }
+        }]
+      },
       {
-        test: /\.(css|scss|sass)$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
+        test: /\.(css|sass|scss)$/,
+        use: [{
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => {
-                require('autoprefixer')
+              plugins: function () {
+                return [require('autoprefixer')]
               }
             }
           },
-          { loader: 'sass-loader' }
+          {
+            loader: 'sass-loader'
+          }
         ]
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[path][hash].[ext]'
-            }
+        test: /\.(jpe?g|png|gif|mp3|svg|ttf|eot)$/i,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[path][hash].[ext]',
+            context: ''
           }
-        ]
+        }]
       }
     ]
   },
   plugins: [
-    new CleanWebpackPlugin({
-      verbose: true
+    /*
+    | 如果執行環境是 Production, 那麼就將程式 minimize
+    */
+    new webpack.LoaderOptionsPlugin({
+      minimize: false
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './index.html'
+    }),
+    new CleanWebpackPlugin({
+      verbose: true
     })
   ]
 }
